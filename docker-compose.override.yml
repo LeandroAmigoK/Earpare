@@ -1,0 +1,14 @@
+# Local development override — no nginx, no certbot, direct port access
+services:
+  app:
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app   # Hot-reload: mount entire project
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+
+  nginx:
+    profiles: ["disabled"]
+
+  certbot:
+    profiles: ["disabled"]

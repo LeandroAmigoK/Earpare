@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EarRape - Stream & Discover Music</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/static/assets/mascot_cat.svg" />
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Glass Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-logo" onclick="window.app.navigate('home')" title="EarRape Music">
+        <div class="mascot-box" id="mascot-avatar-box">
+          <img src="/static/assets/mascot_cat.svg" style="width: 100%; height: 100%; object-fit: contain;" alt="EarRape Mascot" />
+        </div>
+        <div class="brand-name">
+          EarRape
+          <span class="brand-tag">MUSIC</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="nav-group">
+        <a class="nav-item active" data-route="home">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Inicio
+        </a>
+        <a class="nav-item" data-route="search">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          Explorar
+        </a>
+        <a class="nav-item" data-route="favorites">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          Tus Me Gusta
+        </a>
+      </nav>
+
+      <div class="nav-separator"></div>
+
+      <!-- Creator Studio Badge -->
+      <div class="artist-portal-badge" id="artist-sidebar-badge">
+        <div class="artist-badge-header">
+          <img src="/static/assets/mascot_cat.svg" style="width: 18px; height: 18px;" />
+          <span>PORTAL DE ARTISTAS</span>
+        </div>
+        <div class="artist-badge-title">EarRape for Artists</div>
+        <div class="artist-badge-sub">Sube tus temas, publica álbumes oficiales y analiza tus oyentes en tiempo real.</div>
+      </div>
+
+      <!-- Playlists Section -->
+      <div class="library-section">
+        <div class="library-header">
+          <span>TUS PLAYLISTS</span>
+          <button class="btn-icon-round" id="btn-create-playlist" title="Crear Playlist">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+
+        <div class="playlists-list" id="sidebar-playlists-list"></div>
+
+        <!-- Followed Artists Section -->
+        <div id="sidebar-followed-artists" style="margin-top: 18px;"></div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="nav-history-buttons">
+          <button class="nav-round-btn" onclick="window.history.back()" title="Atrás">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="nav-round-btn" onclick="window.history.forward()" title="Adelante">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+        <div class="search-box-container">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="top-search-input" placeholder="Buscar canciones, artistas, discos..." />
+        </div>
+
+        <div class="top-actions">
+          <button class="btn-pill btn-pill-artist" id="btn-open-artist-portal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 18V5l12-2v13"></path>
+              <circle cx="6" cy="18" r="3"></circle>
+              <circle cx="18" cy="16" r="3"></circle>
+            </svg>
+            Studio Creadores
+          </button>
+
+          <!-- GTA World PCU Auth Container -->
+          <div id="auth-user-container"></div>
+        </div>
+      </header>
+
+      <!-- Dynamic View Container -->
+      <div class="view-content"></div>
+    </main>
+
+    <!-- Unique Floating Glass Dock Audio Player -->
+    <div class="player-bar-dock">
+      <!-- Left: Song details & Animated Waveform -->
+      <div class="player-left">
+        <img id="player-thumb" src="/static/assets/default_cover.png" class="player-thumb" alt="Cover" />
+        <div class="player-track-info">
+          <div id="player-title" class="player-track-title">EarRape Music</div>
+          <div id="player-artist" class="player-track-artist">Selecciona una pista</div>
+        </div>
+        <!-- Live Audio Waveform Canvas -->
+        <canvas id="waveform-canvas" class="waveform-canvas" width="60" height="24"></canvas>
+        <button id="player-like-btn" class="heart-btn" title="Guardar en Tus Me Gusta">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Center: Playback Controls & Scrubber -->
+      <div class="player-center">
+        <div class="player-controls">
+          <button class="player-btn" id="player-shuffle-btn" title="Activar aleatorio">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.8-1.1 2-1.7 3.3-1.7H22"/>
+              <path d="m18 2 4 4-4 4"/>
+              <path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/>
+              <path d="M22 18h-5.9c-1.3 0-2.5-.7-3.3-1.8l-.5-.7"/>
+              <path d="m18 14 4 4-4 4"/>
+            </svg>
+          </button>
+          <button class="player-btn" id="player-prev-btn" title="Anterior">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="19 20 9 12 19 4 19 20"/>
+              <line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </button>
+          <button class="player-btn player-btn-main" id="player-play-btn" title="Reproducir">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </button>
+          <button class="player-btn" id="player-next-btn" title="Siguiente">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 4 15 12 5 20 5 4"/>
+              <line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </button>
+          <button class="player-btn" id="player-repeat-btn" title="Repetir">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="17 1 21 5 17 9"/>
+              <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+              <polyline points="7 23 3 19 7 15"/>
+              <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="playback-bar">
+          <span class="playback-time" id="player-current-time">0:00</span>
+          <input type="range" id="player-progress" min="0" max="100" value="0" />
+          <span class="playback-time" id="player-duration-time">0:00</span>
+        </div>
+      </div>
+
+      <!-- Right: Queue, Lyrics, Fullscreen, Volume & FX -->
+      <div class="player-right">
+        <!-- Lyrics Button -->
+        <button class="player-btn" id="player-lyrics-btn" title="Letras de la canción">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </button>
+
+        <!-- Queue / Up Next Button -->
+        <button class="player-btn" id="player-queue-btn" title="Cola de reproducción">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+        </button>
+
+        <!-- Share Current Track -->
+        <button class="player-btn" id="player-share-btn" title="Compartir canción">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+        </button>
+
+        <!-- Equalizer FX Button -->
+        <button class="player-btn" id="player-equalizer-btn" title="Ecualizador de audio">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="4" y1="21" x2="4" y2="14"/>
+            <line x1="4" y1="10" x2="4" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12" y2="3"/>
+            <line x1="20" y1="21" x2="20" y2="16"/>
+            <line x1="20" y1="12" x2="20" y2="3"/>
+            <line x1="1" y1="14" x2="7" y2="14"/>
+            <line x1="9" y1="8" x2="15" y2="8"/>
+            <line x1="17" y1="16" x2="23" y2="16"/>
+          </svg>
+        </button>
+
+        <!-- Expand / Fullscreen Player -->
+        <button class="player-btn" id="player-expand-btn" title="Vista inmersiva">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+            <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+          </svg>
+        </button>
+
+        <button class="player-btn" id="player-volume-btn" title="Silenciar">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+        </button>
+        <div class="volume-bar">
+          <input type="range" id="player-volume" min="0" max="1" step="0.01" value="0.8" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Queue / Up Next Slide-Up Drawer -->
+    <div id="queue-panel" class="queue-panel">
+      <div class="queue-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <h3 class="queue-title">Cola de reproducción</h3>
+          <span id="queue-badge" class="queue-badge">0 pistas</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button id="queue-clear-btn" class="queue-action-btn" title="Limpiar lista">Vaciar cola</button>
+          <button id="queue-close-btn" class="queue-action-btn" title="Cerrar">&times;</button>
+        </div>
+      </div>
+
+      <!-- Currently Playing in Queue -->
+      <div class="queue-section-label">Sonando ahora</div>
+      <div id="queue-now-playing" class="queue-now-playing">
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Ninguna pista en reproducción</p>
+      </div>
+
+      <!-- Up Next List -->
+      <div class="queue-section-label" style="margin-top: 16px;">A continuación</div>
+      <div id="queue-list" class="queue-list">
+        <p style="color: var(--text-muted); font-size: 0.85rem; padding: 12px 0;">La cola está vacía. Añade canciones para escucharlas a continuación.</p>
+      </div>
+    </div>
+
+    <!-- Lyrics Slide-Up Drawer -->
+    <div id="lyrics-panel" class="lyrics-panel">
+      <div class="lyrics-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <h3 class="lyrics-title">Letras</h3>
+          <span id="lyrics-song-title" class="lyrics-badge"></span>
+        </div>
+        <button id="lyrics-close-btn" class="queue-action-btn" title="Cerrar">&times;</button>
+      </div>
+      <div id="lyrics-content" class="lyrics-body">
+        <p class="lyrics-placeholder">Reproduce una canción para ver su letra.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen / Immersive Player Overlay -->
+  <div id="fullscreen-player" class="fullscreen-player">
+    <div class="fullscreen-bg" id="fullscreen-bg"></div>
+    <div class="fullscreen-overlay"></div>
+    
+    <div class="fullscreen-top">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="/static/assets/mascot_cat.svg" style="width: 28px; height: 28px;" />
+        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px;">EARRAPE NOW PLAYING</span>
+      </div>
+      <button class="fullscreen-close-btn" id="fullscreen-close-btn" title="Minimizar (Esc)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+      </button>
+    </div>
+
+    <div class="fullscreen-content">
+      <div class="fullscreen-left">
+        <div class="fullscreen-cover-wrap">
+          <img id="fullscreen-cover" src="/static/assets/default_cover.png" class="fullscreen-cover" alt="Art" />
+        </div>
+      </div>
+
+      <div class="fullscreen-right">
+        <div class="fullscreen-track-details">
+          <div class="fullscreen-tag" id="fullscreen-genre">MUSIC</div>
+          <h1 class="fullscreen-title" id="fullscreen-title">EarRape Music</h1>
+          <h2 class="fullscreen-artist" id="fullscreen-artist">Selecciona una pista</h2>
+          <div class="fullscreen-album" id="fullscreen-album"></div>
+        </div>
+
+        <div class="fullscreen-lyrics-box" id="fullscreen-lyrics-box">
+          <div class="fullscreen-lyrics-text" id="fullscreen-lyrics-text">
+            Reproduce una canción para ver su letra aquí...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Equalizer Modal -->
+  <div class="modal-backdrop" id="modal-equalizer">
+    <div class="modal-card" style="max-width: 520px;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple-light)" stroke-width="2">
+            <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+            <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+            <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+          </svg>
+          <h3 class="modal-title">Ecualizador de Audio PRO</h3>
+        </div>
+        <button class="modal-close" onclick="window.app.closeModals()">&times;</button>
+      </div>
+
+      <div class="eq-container">
+        <!-- Preset Selector Pills -->
+        <div class="eq-presets-label">Presets de Sonido</div>
+        <div class="eq-presets-wrap" id="eq-presets-wrap">
+          <button type="button" class="eq-preset-btn active" data-preset="flat">Plano</button>
+          <button type="button" class="eq-preset-btn" data-preset="bass_boost">Bass Boost 🔥</button>
+          <button type="button" class="eq-preset-btn" data-preset="treble_boost">Treble / Brillante</button>
+          <button type="button" class="eq-preset-btn" data-preset="vocal">Voces Claras</button>
+          <button type="button" class="eq-preset-btn" data-preset="electronic">Electrónica / Club</button>
+          <button type="button" class="eq-preset-btn" data-preset="rock">Rock / Punch</button>
+          <button type="button" class="eq-preset-btn" data-preset="lofi">Lo-Fi Chill</button>
+        </div>
+
+        <!-- 5-Band Slider Sliders -->
+        <div class="eq-sliders-grid">
+          <div class="eq-band-col">
+            <span class="eq-band-val" id="eq-val-0">0dB</span>
+            <input type="range" class="eq-band-slider" id="eq-slider-0" min="-12" max="12" step="0.5" value="0" style="writing-mode: vertical-lr; direction: rtl" />
+            <span class="eq-band-freq">60 Hz<br><small>Grave</small></span>
+          </div>
+          <div class="eq-band-col">
+            <span class="eq-band-val" id="eq-val-1">0dB</span>
+            <input type="range" class="eq-band-slider" id="eq-slider-1" min="-12" max="12" step="0.5" value="0" style="writing-mode: vertical-lr; direction: rtl" />
+            <span class="eq-band-freq">250 Hz<br><small>Bajo-Medio</small></span>
+          </div>
+          <div class="eq-band-col">
+            <span class="eq-band-val" id="eq-val-2">0dB</span>
+            <input type="range" class="eq-band-slider" id="eq-slider-2" min="-12" max="12" step="0.5" value="0" style="writing-mode: vertical-lr; direction: rtl" />
+            <span class="eq-band-freq">1 kHz<br><small>Medio</small></span>
+          </div>
+          <div class="eq-band-col">
+            <span class="eq-band-val" id="eq-val-3">0dB</span>
+            <input type="range" class="eq-band-slider" id="eq-slider-3" min="-12" max="12" step="0.5" value="0" style="writing-mode: vertical-lr; direction: rtl" />
+            <span class="eq-band-freq">4 kHz<br><small>Medio-Alto</small></span>
+          </div>
+          <div class="eq-band-col">
+            <span class="eq-band-val" id="eq-val-4">0dB</span>
+            <input type="range" class="eq-band-slider" id="eq-slider-4" min="-12" max="12" step="0.5" value="0" style="writing-mode: vertical-lr; direction: rtl" />
+            <span class="eq-band-freq">12 kHz<br><small>Agudo</small></span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 18px;">
+        <button type="button" class="btn-pill btn-pill-secondary" onclick="window.app.player.resetEqualizer()">Restablecer</button>
+        <button type="button" class="btn-pill btn-pill-primary" onclick="window.app.closeModals()">Listo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Playlist Modal -->
+  <div class="modal-backdrop" id="modal-edit-playlist">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Editar Playlist</h3>
+        <button class="modal-close" onclick="window.app.closeModals()">&times;</button>
+      </div>
+      <form id="form-edit-playlist" style="display: flex; flex-direction: column; gap: 16px;">
+        <input type="hidden" id="edit-playlist-id" />
+        <div class="form-group">
+          <label class="form-label">Nombre de la playlist</label>
+          <input type="text" id="edit-playlist-name" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Descripción</label>
+          <textarea id="edit-playlist-desc" class="form-textarea" rows="3" placeholder="Descripción de tu playlist..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cambiar portada (imagen personalizada)</label>
+          <input type="file" id="edit-playlist-cover" class="form-input" accept="image/*" />
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px;">
+          <button type="button" class="btn-pill btn-pill-secondary" onclick="window.app.closeModals()">Cancelar</button>
+          <button type="submit" class="btn-pill btn-pill-primary">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Create Playlist Modal -->
+  <div class="modal-backdrop" id="modal-create-playlist">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Crear nueva playlist</h3>
+        <button class="modal-close" onclick="window.app.closeModals()">&times;</button>
+      </div>
+      <form id="form-create-playlist" style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="form-group">
+          <label class="form-label">Nombre de la playlist</label>
+          <input type="text" id="input-playlist-name" class="form-input" placeholder="Mi playlist favorita" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Descripción (opcional)</label>
+          <textarea id="input-playlist-desc" class="form-textarea" rows="3" placeholder="Selección de canciones recomendadas..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Portada personalizada (opcional)</label>
+          <input type="file" id="input-playlist-cover" class="form-input" accept="image/*" />
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px;">
+          <button type="button" class="btn-pill btn-pill-secondary" onclick="window.app.closeModals()">Cancelar</button>
+          <button type="submit" class="btn-pill btn-pill-primary">Guardar Playlist</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add to Playlist Selector Modal -->
+  <div class="modal-backdrop" id="modal-add-to-playlist">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Añadir canción a Playlist</h3>
+        <button class="modal-close" onclick="window.app.closeModals()">&times;</button>
+      </div>
+      <div id="add-playlist-options" style="display: flex; flex-direction: column; gap: 6px; max-height: 300px; overflow-y: auto;"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- App Scripts -->
+  <script src="/static/js/player.js?v=1789579799"></script>
+  <script src="/static/js/artist-portal.js?v=1789579799"></script>
+  <script src="/static/js/app.js?v=1789579799"></script>
+</body>
+</html>
