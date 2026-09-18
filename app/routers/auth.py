@@ -28,9 +28,8 @@ def get_auth_config():
 @router.get("/login")
 def login():
     """Redirects the user to GTA World PCU OAuth Authorize page"""
-    if CLIENT_ID == "YOUR_CLIENT_ID":
-        # If credentials not yet configured, redirect to login page with notice or allow demo
-        return RedirectResponse(url=f"/?auth_warning=config_needed")
+    if not CLIENT_ID or CLIENT_ID == "YOUR_CLIENT_ID":
+        return RedirectResponse(url="/?auth_warning=config_needed")
     
     url = f"{AUTH_URL}?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&response_type=code&scope="
     return RedirectResponse(url=url)
