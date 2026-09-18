@@ -2951,3 +2951,255 @@ input[type=range]:hover::-webkit-slider-thumb {
   justify-content: flex-end;
   gap: 12px;
 }
+
+
+/* ==========================================================================
+   EARRAPE SIGNATURE PURPLE SPOTIFY THEME (FIXED & POLISHED)
+   ========================================================================== */
+
+/* Mascot & Brand */
+.mascot-box {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(99, 102, 241, 0.15));
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  position: relative;
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+}
+.mascot-box:hover {
+  transform: scale(1.08) rotate(2deg);
+}
+.mascot-box.dancing {
+  animation: mascotBounce 1.6s infinite ease-in-out;
+}
+@keyframes mascotBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-3px) rotate(-4deg); }
+  75% { transform: translateY(-3px) rotate(4deg); }
+}
+
+/* Horizontal Scroll Sections */
+.scroll-section {
+  margin-bottom: 32px;
+  width: 100%;
+}
+.scroll-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+.scroll-section-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+.scroll-section-sub {
+  font-size: 0.82rem;
+  color: #a7a7a7;
+  margin-top: 2px;
+}
+
+.scroll-row {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 16px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 4px 4px 12px 4px !important;
+  scrollbar-width: thin !important;
+}
+
+.scroll-card {
+  flex: 0 0 175px !important;
+  width: 175px !important;
+  background: #151022 !important;
+  padding: 12px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.22s cubic-bezier(0.3, 0, 0, 1) !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.scroll-card:hover {
+  background: #231b36 !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+.scroll-card-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  background: #1c152e;
+}
+.scroll-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.scroll-card-play {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #a855f7;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(168, 85, 247, 0.4);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.scroll-card:hover .scroll-card-play {
+  opacity: 1;
+  transform: translateY(0);
+}
+.scroll-card-play:hover {
+  background: #c084fc !important;
+  transform: scale(1.08) !important;
+}
+
+.scroll-card-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+.scroll-card-sub {
+  font-size: 0.78rem;
+  color: #9d94be;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mix Cards */
+.mix-card {
+  flex: 0 0 200px !important;
+  width: 200px !important;
+  height: 120px !important;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.22s ease;
+}
+.mix-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Bottom Player Dock (Fixed layout) */
+.player-bar-dock {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 84px !important;
+  background: #0d0a17 !important;
+  border-top: 1px solid rgba(168, 85, 247, 0.18) !important;
+  display: grid !important;
+  grid-template-columns: 280px 1fr 280px !important;
+  align-items: center !important;
+  padding: 0 20px !important;
+  z-index: 1000 !important;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5) !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+.player-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  min-width: 0 !important;
+}
+.player-thumb {
+  width: 54px !important;
+  height: 54px !important;
+  border-radius: 6px !important;
+  object-fit: cover !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+}
+.player-track-info {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+.player-track-title {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.player-track-artist {
+  font-size: 0.78rem !important;
+  color: #9d94be !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.player-center {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+}
+.player-controls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px !important;
+}
+.player-btn-main {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  background: #a855f7 !important;
+  color: #ffffff !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4) !important;
+}
+.player-btn-main:hover {
+  background: #c084fc !important;
+  transform: scale(1.08) !important;
+}
+
+.player-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 14px !important;
+}
