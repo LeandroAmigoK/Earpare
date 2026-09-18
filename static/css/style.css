@@ -1,30 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap');
 
 :root {
-  --bg-deep: #07060b;
-  --bg-base: #0d0b14;
-  --bg-card: rgba(23, 19, 38, 0.7);
-  --bg-card-hover: rgba(38, 30, 62, 0.85);
-  --bg-elevated: #1e1833;
-  --bg-glass: rgba(18, 14, 30, 0.75);
+  --bg-deep: #000000;
+  --bg-base: #121212;
+  --bg-card: #181818;
+  --bg-card-hover: #282828;
+  --bg-elevated: #242424;
+  --bg-glass: #121212;
   
-  /* Cyber Violet & Ultraviolet Theme */
-  --accent-purple: #a855f7;
-  --accent-purple-light: #c084fc;
-  --accent-purple-dark: #6b21a8;
-  --accent-pink: #f43f5e;
-  --accent-cyan: #06b6d4;
-  --accent-glow: 0 0 24px rgba(168, 85, 247, 0.45);
+  /* Spotify Signature Palette */
+  --spotify-green: #1ed760;
+  --spotify-green-hover: #1fdf64;
+  --spotify-green-dark: #169c46;
+  --accent-green: #1ed760;
+  --accent-purple: #1ed760;
+  --accent-purple-light: #1ed760;
+  --accent-purple-dark: #169c46;
+  --accent-pink: #1ed760;
+  --accent-cyan: #1ed760;
+  --accent-glow: 0 8px 24px rgba(30, 215, 96, 0.25);
   
   --text-main: #ffffff;
-  --text-muted: #9d94be;
-  --text-sub: #6f678e;
-  --border-glass: rgba(168, 85, 247, 0.18);
-  --border-glow: rgba(192, 132, 252, 0.4);
+  --text-muted: #b3b3b3;
+  --text-sub: #727272;
+  --border-glass: #282828;
+  --border-glow: rgba(30, 215, 96, 0.35);
   
-  --floating-player-height: 84px;
-  --sidebar-width: 270px;
-  --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --floating-player-height: 90px;
+  --sidebar-width: 280px;
+  --transition-smooth: all 0.2s cubic-bezier(0.3, 0, 0, 1);
 }
 
 * {
@@ -34,12 +38,9 @@
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: var(--bg-deep);
-  background-image: 
-    radial-gradient(circle at 15% 20%, rgba(168, 85, 247, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 85% 75%, rgba(99, 102, 241, 0.1) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.05) 0%, transparent 60%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #000000;
+  background-image: none;
   color: var(--text-main);
   user-select: none;
   overflow: hidden;
@@ -57,11 +58,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(168, 85, 247, 0.25);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(168, 85, 247, 0.55);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 /* Layout */
@@ -1066,7 +1067,7 @@ input[type="range"]::-webkit-slider-thumb {
   backdrop-filter: blur(28px);
   border: 1px solid rgba(192, 132, 252, 0.3);
   border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(168, 85, 247, 0.25);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -1245,7 +1246,7 @@ input[type="range"]::-webkit-slider-thumb {
   backdrop-filter: blur(32px);
   border: 1px solid rgba(192, 132, 252, 0.3);
   border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(168, 85, 247, 0.25);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -2397,3 +2398,556 @@ input[type="range"]::-webkit-slider-thumb {
   }
 }
 
+
+/* ==========================================================================
+   SPOTIFY AUTHENTIC UI OVERHAUL
+   ========================================================================== */
+
+/* Spotify Layout & Windows */
+.app-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: 1fr;
+  height: calc(100vh - var(--floating-player-height));
+  padding: 8px 8px 0 8px;
+  gap: 8px;
+  position: relative;
+  background: #000000;
+}
+
+.sidebar {
+  background: #121212;
+  border-radius: 8px;
+  border: none;
+  padding: 20px 16px;
+  box-shadow: none;
+}
+
+.main-wrapper {
+  background: #121212;
+  border-radius: 8px;
+  border: none;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Spotify Header Brand */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 0 4px 14px 4px;
+}
+.spotify-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-name {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  background: none;
+  -webkit-text-fill-color: initial;
+}
+.brand-tag {
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(30, 215, 96, 0.15);
+  color: #1ed760;
+  border: 1px solid rgba(30, 215, 96, 0.3);
+}
+
+/* Spotify Nav Links */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  color: #b3b3b3;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: color 0.2s ease, background 0.2s ease;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.nav-item:hover {
+  color: #ffffff;
+  background: transparent;
+  transform: none;
+}
+.nav-item.active {
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.nav-item.active svg {
+  color: #ffffff;
+  filter: none;
+}
+
+/* Spotify for Artists Badge in Sidebar */
+.artist-portal-badge {
+  background: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 14px;
+  box-shadow: none;
+  transition: background 0.2s ease;
+}
+.artist-portal-badge::before {
+  display: none;
+}
+.artist-portal-badge:hover {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: none;
+  box-shadow: none;
+}
+.artist-badge-header {
+  color: #1ed760;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.artist-badge-title {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 2px 0;
+}
+.artist-badge-sub {
+  color: #a7a7a7;
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+/* Spotify Top Bar */
+.top-bar {
+  background: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.search-box-container {
+  background: #242424;
+  border: 1px solid transparent;
+  border-radius: 500px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 360px;
+  transition: all 0.2s ease;
+}
+.search-box-container:focus-within {
+  background: #2a2a2a;
+  border-color: #ffffff;
+  box-shadow: none;
+}
+.search-box-container input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.88rem;
+  width: 100%;
+}
+.search-box-container input::placeholder {
+  color: #727272;
+}
+
+.btn-pill-artist {
+  background: #181818 !important;
+  color: #ffffff !important;
+  border: 1px solid #727272 !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  padding: 8px 16px !important;
+  border-radius: 500px !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease !important;
+}
+.btn-pill-artist:hover {
+  border-color: #ffffff !important;
+  transform: scale(1.04);
+}
+
+/* Spotify Quick Access Tiles */
+.home-greeting {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 16px 0 18px 0;
+  letter-spacing: -0.5px;
+}
+
+.quick-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.quick-tile {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s ease;
+}
+.quick-tile:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.quick-tile-thumb, .quick-tile-thumb-icon {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  object-fit: cover;
+}
+.quick-tile-thumb-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #450af5, #c4efd9);
+  font-size: 1.4rem;
+}
+.quick-tile-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #ffffff;
+  padding: 0 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.quick-tile-play {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1ed760;
+  color: #000000;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 14px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.quick-tile:hover .quick-tile-play {
+  opacity: 1;
+  transform: translateY(0);
+}
+.quick-tile-play:hover {
+  transform: scale(1.06) !important;
+  background: #1fdf64;
+}
+
+/* Spotify Card Grid */
+.scroll-section {
+  margin-bottom: 36px;
+}
+.scroll-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 14px;
+}
+.scroll-section-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.4px;
+}
+.scroll-section-sub {
+  font-size: 0.85rem;
+  color: #b3b3b3;
+  margin-top: 2px;
+}
+
+.scroll-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 18px;
+}
+
+.scroll-card {
+  background: #181818;
+  padding: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  position: relative;
+}
+.scroll-card:hover {
+  background: #282828;
+}
+
+.scroll-card-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.scroll-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.scroll-card-play {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1ed760;
+  color: #000000;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  z-index: 5;
+}
+.scroll-card:hover .scroll-card-play {
+  opacity: 1;
+  transform: translateY(0);
+}
+.scroll-card-play:hover {
+  transform: scale(1.08) !important;
+  background: #1fdf64;
+}
+
+.scroll-card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+.scroll-card-sub {
+  font-size: 0.82rem;
+  color: #b3b3b3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.scroll-card-sub:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Spotify Bottom Player Bar */
+.player-bar-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--floating-player-height);
+  background: #000000;
+  border-top: 1px solid #282828;
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 1000;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.player-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.player-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+.player-track-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.player-track-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.player-track-artist {
+  font-size: 0.78rem;
+  color: #b3b3b3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.player-track-artist:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.heart-btn {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.heart-btn:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+.heart-btn.liked {
+  color: #1ed760;
+}
+
+.player-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.player-btn {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+.player-btn:hover {
+  color: #ffffff;
+}
+.player-btn.active {
+  color: #1ed760;
+  position: relative;
+}
+.player-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  width: 4px;
+  height: 4px;
+  background: #1ed760;
+  border-radius: 50%;
+}
+.player-btn-main {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.player-btn-main:hover {
+  transform: scale(1.08);
+  background: #f0f0f0;
+}
+
+.player-scrubber {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.player-time {
+  font-size: 0.72rem;
+  color: #a7a7a7;
+  min-width: 35px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Spotify Green Range Inputs */
+input[type=range] {
+  -webkit-appearance: none;
+  background: #4d4d4d;
+  height: 4px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+input[type=range]:hover {
+  background: #1ed760;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+input[type=range]:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.player-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
