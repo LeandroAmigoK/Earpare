@@ -20,12 +20,12 @@ class ArtistPortal {
       <div class="artist-portal-container">
         <div class="artist-portal-header">
           <div style="display: flex; align-items: center; gap: 20px;">
-            <div style="width: 60px; height: 60px; min-width: 60px; border-radius: 12px; background: linear-gradient(135deg, #1ed760, #169c46); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(30, 215, 96, 0.35);">
+            <div style="width: 60px; height: 60px; min-width: 60px; border-radius: 12px; background: linear-gradient(135deg, #a855f7, #7c3aed); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(168, 85, 247, 0.35);">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="#000000"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2H3v2a9 9 0 0 0 8 8.94V23h2v-2.06A9 9 0 0 0 21 12v-2h-2z"/></svg>
             </div>
             <div>
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                <span style="background: rgba(30, 215, 96, 0.15); color: #1ed760; font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 500px; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(30, 215, 96, 0.3);">
+                <span style="background: rgba(168, 85, 247, 0.15); color: #a855f7; font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 500px; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(168, 85, 247, 0.3);">
                   Spotify for Artists Edition
                 </span>
               </div>

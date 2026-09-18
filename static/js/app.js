@@ -1023,7 +1023,8 @@ class SoundFlowApp {
           <button class="btn-hero-play" onclick="window.app.playSongList(${JSON.stringify(tracks).replace(/"/g, '&quot;')})">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           </button>
-          <button class="btn-pill btn-pill-secondary" onclick="window.app.openEditPlaylistModal(${playlist.id})">
+          <button class="btn-pill btn-pill-secondary" onclick="window.app.openEditPlaylistModal(${playlist.id})">
+
             ✏️ Editar Playlist
           </button>
           <button class="btn-pill btn-pill-secondary" onclick="window.app.shareItem('playlist', ${playlist.id}, encodeURIComponent(playlist.name))">
@@ -1192,11 +1193,16 @@ class SoundFlowApp {
     }
   }
 
-  openEditPlaylistModal(playlistId) {
-    const playlist = this.playlists.find(p => p.id === playlistId);
-    if (!playlist) return;
-    const name = playlist.name || '';
-    const desc = playlist.description || '';
+  openEditPlaylistModal(playlistId) {
+
+    const playlist = this.playlists.find(p => p.id === playlistId);
+
+    if (!playlist) return;
+
+    const name = playlist.name || '';
+
+    const desc = playlist.description || '';
+
     const modal = document.getElementById('modal-edit-playlist');
     if (!modal) return;
     document.getElementById('edit-playlist-id').value = playlistId;

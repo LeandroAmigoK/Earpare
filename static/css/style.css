@@ -9,22 +9,22 @@
   --bg-glass: #121212;
   
   /* Spotify Signature Palette */
-  --spotify-green: #1ed760;
-  --spotify-green-hover: #1fdf64;
-  --spotify-green-dark: #169c46;
-  --accent-green: #1ed760;
-  --accent-purple: #1ed760;
-  --accent-purple-light: #1ed760;
-  --accent-purple-dark: #169c46;
-  --accent-pink: #1ed760;
-  --accent-cyan: #1ed760;
-  --accent-glow: 0 8px 24px rgba(30, 215, 96, 0.25);
+  --spotify-green: #a855f7;
+  --spotify-green-hover: #c084fc;
+  --spotify-green-dark: #7c3aed;
+  --accent-green: #a855f7;
+  --accent-purple: #a855f7;
+  --accent-purple-light: #a855f7;
+  --accent-purple-dark: #7c3aed;
+  --accent-pink: #a855f7;
+  --accent-cyan: #a855f7;
+  --accent-glow: 0 8px 24px rgba(168, 85, 247, 0.25);
   
   --text-main: #ffffff;
   --text-muted: #b3b3b3;
   --text-sub: #727272;
   --border-glass: #282828;
-  --border-glow: rgba(30, 215, 96, 0.35);
+  --border-glow: rgba(168, 85, 247, 0.35);
   
   --floating-player-height: 90px;
   --sidebar-width: 280px;
@@ -39,7 +39,7 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: #000000;
+  background-color: #090710;
   background-image: none;
   color: var(--text-main);
   user-select: none;
@@ -2412,11 +2412,11 @@ input[type="range"]::-webkit-slider-thumb {
   padding: 8px 8px 0 8px;
   gap: 8px;
   position: relative;
-  background: #000000;
+  background: #090710;
 }
 
 .sidebar {
-  background: #121212;
+  background: #100c1c;
   border-radius: 8px;
   border: none;
   padding: 20px 16px;
@@ -2424,7 +2424,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .main-wrapper {
-  background: #121212;
+  background: #100c1c;
   border-radius: 8px;
   border: none;
   overflow-y: auto;
@@ -2458,9 +2458,9 @@ input[type="range"]::-webkit-slider-thumb {
   font-weight: 800;
   padding: 2px 6px;
   border-radius: 4px;
-  background: rgba(30, 215, 96, 0.15);
-  color: #1ed760;
-  border: 1px solid rgba(30, 215, 96, 0.3);
+  background: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.3);
 }
 
 /* Spotify Nav Links */
@@ -2513,7 +2513,7 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: none;
 }
 .artist-badge-header {
-  color: #1ed760;
+  color: #a855f7;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.5px;
@@ -2647,7 +2647,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #1ed760;
+  background: #a855f7;
   color: #000000;
   border: none;
   display: flex;
@@ -2666,7 +2666,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .quick-tile-play:hover {
   transform: scale(1.06) !important;
-  background: #1fdf64;
+  background: #c084fc;
 }
 
 /* Spotify Card Grid */
@@ -2698,7 +2698,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .scroll-card {
-  background: #181818;
+  background: #171226;
   padding: 14px;
   border-radius: 6px;
   cursor: pointer;
@@ -2706,7 +2706,7 @@ input[type="range"]::-webkit-slider-thumb {
   position: relative;
 }
 .scroll-card:hover {
-  background: #282828;
+  background: #231b38;
 }
 
 .scroll-card-wrap {
@@ -2733,7 +2733,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #1ed760;
+  background: #a855f7;
   color: #000000;
   border: none;
   display: flex;
@@ -2752,7 +2752,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .scroll-card-play:hover {
   transform: scale(1.08) !important;
-  background: #1fdf64;
+  background: #c084fc;
 }
 
 .scroll-card-title {
@@ -2783,8 +2783,8 @@ input[type="range"]::-webkit-slider-thumb {
   left: 0;
   right: 0;
   height: var(--floating-player-height);
-  background: #000000;
-  border-top: 1px solid #282828;
+  background: #090710;
+  border-top: 1px solid rgba(168, 85, 247, 0.15);
   display: grid;
   grid-template-columns: 30% 40% 30%;
   align-items: center;
@@ -2847,7 +2847,7 @@ input[type="range"]::-webkit-slider-thumb {
   transform: scale(1.1);
 }
 .heart-btn.liked {
-  color: #1ed760;
+  color: #a855f7;
 }
 
 .player-center {
@@ -2878,7 +2878,7 @@ input[type="range"]::-webkit-slider-thumb {
   color: #ffffff;
 }
 .player-btn.active {
-  color: #1ed760;
+  color: #a855f7;
   position: relative;
 }
 .player-btn.active::after {
@@ -2887,7 +2887,7 @@ input[type="range"]::-webkit-slider-thumb {
   bottom: -4px;
   width: 4px;
   height: 4px;
-  background: #1ed760;
+  background: #a855f7;
   border-radius: 50%;
 }
 .player-btn-main {
@@ -2930,7 +2930,7 @@ input[type=range] {
   cursor: pointer;
 }
 input[type=range]:hover {
-  background: #1ed760;
+  background: #a855f7;
 }
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
